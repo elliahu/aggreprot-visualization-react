@@ -1,10 +1,10 @@
 import React from "react";
-import "./datachart/dist/uPlot.min.css";
-import "./datachart/datachart.css";
-import { fetchDataCSV, makeChart } from "./datachart/datachart";
+import "protein_visualization/dist/uPlot.min.css";
+import "protein_visualization/datachart.css";
+import { fetchData, makeChart, type makeChartConfig} from "protein_visualization";
 
-// name of the csv file that will be fetched
-let csv = process.env.PUBLIC_URL + '/datachart_data/avg_Maternal_protein_pumilio.csv';
+// name of the file that will be fetched
+let sourceFile = process.env.PUBLIC_URL + './datachart_data/DummyData.json';
 
 interface IProps {
     chartFunctions: ReturnType<typeof makeChart> | null,
@@ -25,11 +25,10 @@ class AggregationProfile extends React.Component<IProps> {
     aggregationProfileRef = React.createRef<HTMLDivElement>();
 
     componentDidMount() {
-        // create an optional config to configure chart
-        let config = {
-            enableControls: true, // displays controls at the top
-            onAreaSelected: (min, max) => console.log(`area selected [${min}, ${max}]`), // area selected callback
-            displayThresholdLineInRanger: true, // display / hide threshold line in ranger
+        let config: makeChartConfig = {
+            enableControls: true, // enables or disables chart controls
+            onAreaSelected: function (min, max) { }, // area selected callback fired when area is selected
+            labelBreakPoint: 8, // min width between x labels
             grid: {
                 gridColor: '#dedede',
                 width: 1,
@@ -48,13 +47,18 @@ class AggregationProfile extends React.Component<IProps> {
                 console.log(`residue ${position} was toggled (selected=${selected ? 'true' : 'false'}) using aggregation profile, structure viewer will be updated`);
                 this.props.onResidueSelectedFromProfile(position, selected);
             },
+            columnHighlight: true, // highlight columns on mouse hover
+            displayThresholdLineInRanger: true,
+            rangerTitle: 'Ranger',
+            profilePlotTitle: 'Aggregation profile',
+            sequencePlotTitle: 'Sequence',
         }
 
         // fetch the file then use the data from the result
-        fetchDataCSV(csv).then((result) => {
+        fetchData(sourceFile, 'json').then((result) => {
             // is setTimeout necessary?
             setTimeout(() => {
-                const chartFunctions = makeChart(result!.data, config, this.aggregationProfileRef.current!);
+                const chartFunctions = makeChart(result, config, this.aggregationProfileRef.current!);
                 this.props.setChartFunctions(chartFunctions);
             });
         });

@@ -1,7 +1,7 @@
 import React from 'react';
 import AggregationProfile from './AggregationProfile';
 import './App.css';
-import { makeChart } from './datachart/datachart';
+import { makeChart } from 'protein_visualization';
 import MolstarViewer from './MolstarViewer';
 
 
