@@ -1,7 +1,7 @@
 import React from "react";
 import "protein_visualization/dist/uPlot.min.css";
 import "protein_visualization/datachart.css";
-import { fetchData, makeChart, type makeChartConfig} from "protein_visualization";
+import { fetchData, makeChart, type makeChartConfig, type makeChartData} from "protein_visualization";
 
 // name of the file that will be fetched
 let sourceFile = process.env.PUBLIC_URL + './datachart_data/DummyData.json';
@@ -54,6 +54,8 @@ class AggregationProfile extends React.Component<IProps> {
             sequencePlotTitle: 'Sequence',
         }
 
+        // Using json file:
+        
         // fetch the file then use the data from the result
         fetchData(sourceFile, 'json').then((result) => {
             // is setTimeout necessary?
@@ -62,6 +64,34 @@ class AggregationProfile extends React.Component<IProps> {
                 this.props.setChartFunctions(chartFunctions);
             });
         });
+
+        // Using raw data:
+        /*
+        const data: makeChartData = {
+            dataframes:
+            [
+                // Protein 1
+                [
+                    [0,1,2,3,4,5,6,7,8,9], // x indexes
+                    [0.5,null,null,null,null,null,null,null,null,0.5], // threshold
+                    ['A','B',null,'D','E','F','G','H','I','J'], // labels (sequence)
+                    Array.from({length: 10}, () => Math.random()), // AGG
+                    Array.from({length: 10}, () => Math.random()), // ASA
+                ],
+                // Protein 2 
+                [
+                    [0,1,2,3,4,5,6,7,8,9], // x indexes
+                    [0.5,null,null,null,null,null,null,null,null,0.5], // threshold
+                    ['A','B',null,'D','E','F','G','H','I','J'], // labels (sequence)
+                    Array.from({length: 10}, () => Math.random()), // AGG
+                    Array.from({length: 10}, () => Math.random()), // ASA
+                ]
+            ]
+        };
+
+        const chartFunctions = makeChart(data, config, this.aggregationProfileRef.current!);
+        this.props.setChartFunctions(chartFunctions);
+        */
     }
 
     render() {

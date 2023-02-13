@@ -3,7 +3,7 @@ Symlink and copy the following files from protein_vizualization project.
 ln -s "$PWD/../protein_visualization/output_last/DummyData.json" public/datachart_data/
 ```
 
-Example:
+Configuration:
 ```ts
 let config: makeChartConfig = {
             enableControls: true,
@@ -29,14 +29,45 @@ let config: makeChartConfig = {
             profilePlotTitle: 'Aggregation profile',
             sequencePlotTitle: 'Sequence',
         }
+```
 
-        // fetch the file then use the data from the result
-        fetchData(sourceFile, 'json').then((result) => {
-            setTimeout(() => {
-                const chartFunctions = makeChart(result, config, this.aggregationProfileRef.current!);
-                this.props.setChartFunctions(chartFunctions);
-            });
-        });
+Example using raw data:
+```ts
+const data: makeChartData = {
+    dataframes:
+        [
+            // Protein 1
+            [
+                [0,1,2,3,4,5,6,7,8,9], // x indexes
+                [0.5,null,null,null,null,null,null,null,null,0.5], // threshold
+                ['A','B',null,'D','E','F','G','H','I','J'], // labels (sequence)
+                Array.from({length: 10}, () => Math.random()), // AGG
+                Array.from({length: 10}, () => Math.random()), // ASA
+            ],
+            // Protein 2 
+            [
+                [0,1,2,3,4,5,6,7,8,9], // x indexes
+                [0.5,null,null,null,null,null,null,null,null,0.5], // threshold
+                ['A','B',null,'D','E','F','G','H','I','J'], // labels (sequence)
+                Array.from({length: 10}, () => Math.random()), // AGG
+                Array.from({length: 10}, () => Math.random()), // ASA
+            ]
+        ]
+ };
+
+const chartFunctions = makeChart(data, config, this.aggregationProfileRef.current!);
+this.props.setChartFunctions(chartFunctions);
+```
+
+Example using json file:
+```ts
+// fetch the file then use the data from the result
+fetchData(sourceFile, 'json').then((result) => {
+    setTimeout(() => {
+        const chartFunctions = makeChart(result, config, this.aggregationProfileRef.current!);
+        this.props.setChartFunctions(chartFunctions);
+    );
+});
 ```
 
 Install packages and run development server.
