@@ -13,13 +13,13 @@ interface IProps {
 }
 
 interface IState {
-    // selectedPositions: Record<string, boolean>,
+    thresholdValue:number,
 }
 
 class AggregationProfile extends React.Component<IProps> {
 
     state: IState = {
-        // selectedPositions: {},
+        thresholdValue: 0.5,
     }
 
     aggregationProfileRef = React.createRef<HTMLDivElement>();
@@ -40,10 +40,6 @@ class AggregationProfile extends React.Component<IProps> {
                 dash: []
             },
             onResidueSelectedFromProfile: (position: number, selected: boolean) => {
-                // behaviour:
-                // 1. user selects residue using aggregation profile (will be implemented in datachart.js)
-                // 2. right after the residue is selected, this function onResidueSelectedFromProfile is called
-                // 3. this function will tell structure viewer to show the residue as selected
                 console.log(`residue ${position} was toggled (selected=${selected ? 'true' : 'false'}) using aggregation profile, structure viewer will be updated`);
                 this.props.onResidueSelectedFromProfile(position, selected);
             },
@@ -95,7 +91,15 @@ class AggregationProfile extends React.Component<IProps> {
     }
 
     render() {
-        return <div id="aggregation-profile" ref={this.aggregationProfileRef} />
+        return(
+            <div>
+                <input type="range" min="0" max="1" step="0.01" value={this.state.thresholdValue} onInput={(event)=>{
+                    this.state.thresholdValue = Number.parseFloat((event.target as HTMLInputElement).value);
+                    this.props.chartFunctions?.setThresholdValue(this.state.thresholdValue);
+                }}></input>
+                <div id="aggregation-profile" ref={this.aggregationProfileRef} />
+            </div>
+        ); 
     }
 }
 

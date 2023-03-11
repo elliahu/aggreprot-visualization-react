@@ -264,16 +264,6 @@ class MolstarViewer extends Component<IProps, IState> {
     return (
       <div>
         <div className={'molstar-viewer'}>
-          {/* <div className={'buttons'}>
-            <button onClick={() => {
-              this.selectPosition('cdk4', {
-                position: 18,
-                chain: 'A',
-                color: '#FF0000',
-                focus: true,
-              })
-            }}>Select position 18</button>
-          </div> */}
           <div className={'plugin-container'}>
             <div id={'viewer'} />
             <div id={'controls'} />
