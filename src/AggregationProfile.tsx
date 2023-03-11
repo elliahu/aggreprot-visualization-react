@@ -54,7 +54,6 @@ class AggregationProfile extends React.Component<IProps> {
         
         // fetch the file then use the data from the result
         fetchData(sourceFile, 'json').then((result) => {
-            // is setTimeout necessary?
             setTimeout(() => {
                 const chartFunctions = makeChart(result, config, this.aggregationProfileRef.current!);
                 this.props.setChartFunctions(chartFunctions);
@@ -67,27 +66,27 @@ class AggregationProfile extends React.Component<IProps> {
             dataframes:
             [
                 // Protein 1
-                [
-                    [0,1,2,3,4,5,6,7,8,9], // x indexes
-                    [0.5,null,null,null,null,null,null,null,null,0.5], // threshold
-                    ['A','B',null,'D','E','F','G','H','I','J'], // labels (sequence)
-                    Array.from({length: 10}, () => Math.random()), // AGG
-                    Array.from({length: 10}, () => Math.random()), // ASA
-                ],
+                {
+                    indexes: [0,1,2,3,4,5,6,7,8,9], // x indexes
+                    threshold: [0.5,null,null,null,null,null,null,null,null,0.5], // threshold
+                    labels: ['A','B',null,'D','E','F','G','H','I','J'], // labels (sequence)
+                    agg: Array.from({length: 10}, () => Math.random()), // AGG
+                    asa: Array.from({length: 10}, () => Math.random()), // ASA
+                },
                 // Protein 2 
-                [
-                    [0,1,2,3,4,5,6,7,8,9], // x indexes
-                    [0.5,null,null,null,null,null,null,null,null,0.5], // threshold
-                    ['A','B',null,'D','E','F','G','H','I','J'], // labels (sequence)
-                    Array.from({length: 10}, () => Math.random()), // AGG
-                    Array.from({length: 10}, () => Math.random()), // ASA
-                ]
+                {
+                    indexes: [0,1,2,3,4,5,6,7,8,9], // x indexes
+                    threshold: [0.5,null,null,null,null,null,null,null,null,0.5], // threshold
+                    labels: ['A','B',null,'D','E','F','G','H','I','J'], // labels (sequence)
+                    agg: Array.from({length: 10}, () => Math.random()), // AGG
+                    asa: Array.from({length: 10}, () => Math.random()), // ASA
+                }
             ]
         };
 
         const chartFunctions = makeChart(data, config, this.aggregationProfileRef.current!);
-        this.props.setChartFunctions(chartFunctions);
-        */
+        this.props.setChartFunctions(chartFunctions); */
+        
     }
 
     render() {
