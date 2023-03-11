@@ -1,7 +1,7 @@
 import React from "react";
 import "protein_visualization/dist/uPlot.min.css";
 import "protein_visualization/datachart.css";
-import { fetchData, makeChart, type makeChartConfig, type makeChartData} from "protein_visualization";
+import { fetchData, makeChart, type makeChartConfig, type makeChartData, type SelectedResidue} from "protein_visualization";
 
 // name of the file that will be fetched
 let sourceFile = process.env.PUBLIC_URL + './datachart_data/DummyData.json';
@@ -39,9 +39,11 @@ class AggregationProfile extends React.Component<IProps> {
                 size: 10,
                 dash: []
             },
-            onResidueSelectedFromProfile: (position: number, selected: boolean) => {
-                console.log(`residue ${position} was toggled (selected=${selected ? 'true' : 'false'}) using aggregation profile, structure viewer will be updated`);
-                this.props.onResidueSelectedFromProfile(position, selected);
+            onResidueSelectedFromProfile: (positions: SelectedResidue[]) => {
+                console.log(`${positions.length} residues were toggled using aggregation profile, structure viewer will be updated`);
+                positions.forEach((position) => {
+                    this.props.onResidueSelectedFromProfile(position.index, position.selected);
+                });
             },
             columnHighlight: true, // highlight columns on mouse hover
             displayThresholdLineInRanger: true,

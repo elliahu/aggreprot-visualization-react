@@ -3,6 +3,7 @@ import AggregationProfile from './AggregationProfile';
 import './App.css';
 import { makeChart } from 'protein_visualization';
 import MolstarViewer from './MolstarViewer';
+import {type SelectedResidue} from "protein_visualization";
 
 
 interface IState {
