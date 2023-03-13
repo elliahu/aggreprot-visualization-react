@@ -26,7 +26,6 @@ class AggregationProfile extends React.Component<IProps> {
 
     componentDidMount() {
         let config: makeChartConfig = {
-            enableControls: true, // enables or disables chart controls
             onAreaSelected: function (min, max) { }, // area selected callback fired when area is selected
             labelBreakPoint: 8, // min width between x labels
             grid: {

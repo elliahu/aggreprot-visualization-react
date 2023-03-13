@@ -8,7 +8,6 @@ Configuration:
 
 ```ts
 let config: makeChartConfig = {
-  enableControls: true,
   onAreaSelected: function (min, max) {},
   labelBreakPoint: 8,
   grid: {
