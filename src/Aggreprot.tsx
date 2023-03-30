@@ -5,6 +5,9 @@ import { makeChart } from 'protein_visualization';
 import StructureViewer from './StructureViewer';
 import {type SelectedResidue} from "protein_visualization";
 
+interface IProps {
+  mapSelectedResidues(input: SelectedResidue): SelectedResidue
+}
 
 interface IState {
   chartFunctions: ReturnType<typeof makeChart> | null,
@@ -12,7 +15,7 @@ interface IState {
   selectedFromStructure: Record<string | number, boolean>,
 }
 
-class Aggreprot extends React.Component<{}, IState> {
+class Aggreprot extends React.Component<IProps, IState> {
 
   molstarViewerComponent = React.createRef<StructureViewer>();
 
@@ -21,12 +24,6 @@ class Aggreprot extends React.Component<{}, IState> {
     selectedFromProfile: {},
     selectedFromStructure: {},
   }
-
-  mapSelectedResidues = function (input: SelectedResidue): SelectedResidue {
-    // mapping 1:1
-    return input;
-  }
-
 
   onResidueSelectedFromProfile = (position: number, selected: boolean, label: string, chain?: string) => {
     this.setState({
