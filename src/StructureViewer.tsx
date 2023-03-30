@@ -85,6 +85,7 @@ interface IState {
 
 interface IProps {
   onResidueClickedInStructure: (position: number, label: string, chain: string) => void;
+  loadProteins: LoadProteinParams[]
 }
 
 class StructureViewer extends Component<IProps, IState> {
@@ -121,30 +122,22 @@ class StructureViewer extends Component<IProps, IState> {
             chain: residueIndex.chain,
             residue: residueIndex.residue,
           });
-          
+
           const loci: Loci = event.current.loci;
           if (Loci.isEmpty(loci) || loci.kind !== 'element-loci') return;
           if (loci.elements.length === 0) return;
 
           const element = loci.elements[0];
           const label = element.unit.model.label;
-          
-          this.props.onResidueClickedInStructure(residueIndex.residueIndex,label, residueIndex.chain);
+
+          this.props.onResidueClickedInStructure(residueIndex.residueIndex, label, residueIndex.chain);
         }
       }
     );
 
-    this.loadProtein({
-      url: process.env.PUBLIC_URL + '/cdk4.pdb',
-      format: 'pdb',
-      label: 'cdk4',
-    });
-
-    this.loadProtein({
-      url: process.env.PUBLIC_URL + '/8fe1.pdb',
-      format: 'pdb',
-      label: '8fe1',
-    });
+    this.props.loadProteins.forEach(proteinParam =>{
+      this.loadProtein(proteinParam);
+    })
   }
 
   /**
