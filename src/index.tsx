@@ -2,11 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import '@loschmidt/molstar/dist/index.css';
-import App from './App';
+import Aggreprot from './Aggreprot';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Aggreprot />
   </React.StrictMode>,
   document.getElementById('root') as HTMLElement
 );
