@@ -31,7 +31,7 @@ fetchData(sourceFile, 'json').then(data => {
     </React.StrictMode>,
     document.getElementById('root') as HTMLElement
   );
-})
+});
 
 // Using raw data:
 /*
