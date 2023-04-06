@@ -1,5 +1,5 @@
 import React from "react";
-import "protein_visualization/dist/uPlot.min.css";
+import "protein_visualization/external/uPlot.min.css";
 import "protein_visualization/datachart.css";
 import { fetchData, makeChart, type makeChartConfig, type makeChartData, type SelectedResidue } from "protein_visualization";
 

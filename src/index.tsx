@@ -3,18 +3,38 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import '@loschmidt/molstar/dist/index.css';
 import Aggreprot from './Aggreprot';
-import { type SelectedResidue, fetchData, type makeChartData } from "protein_visualization";
+import { type SelectedResidue, fetchData, type makeChartData, type makeChartConfig } from "protein_visualization";
 
 
 // name of the file that will be fetched
 let sourceFile = process.env.PUBLIC_URL + './datachart_data/DummyData.json';
 
-fetchData(sourceFile, 'json').then(data => {
+const config: makeChartConfig = {
+  labelBreakPoint: 8, // min width between x labels
+  grid: {
+    gridColor: '#dedede',
+    width: 1,
+    dash: []
+  },
+  ticks: {
+    width: 1,
+    size: 10,
+    dash: []
+  },
+  columnHighlight: true, // highlight columns on mouse hover
+  displayThresholdLineInRanger: true,
+  rangerTitle: 'Ranger',
+  profilePlotTitle: 'Aggregation profile',
+  sequencePlotTitle: 'Sequence',
+}
+
+fetchData(sourceFile).then(data => {
   ReactDOM.render(
     <React.StrictMode>
       <Aggreprot
         mapSelectedResidues={(input: SelectedResidue) => { return input }}
         chartData={data}
+        chartConfig={config}
         loadProteins={[
           {
             url: process.env.PUBLIC_URL + '/cdk4.pdb',
@@ -56,27 +76,6 @@ const data: makeChartData = {
       }
     ]
 };
-ReactDOM.render(
-    <React.StrictMode>
-      <Aggreprot
-        mapSelectedResidues={(input: SelectedResidue) => { return input }}
-        chartData={data}
-        loadProteins={[
-          {
-            url: process.env.PUBLIC_URL + '/cdk4.pdb',
-            format: 'pdb',
-            label: 'cdk4',
-          },
-          {
-            url: process.env.PUBLIC_URL + '/8fe1.pdb',
-            format: 'pdb',
-            label: '8fe1',
-          }
-        ]}
-      />
-    </React.StrictMode>,
-    document.getElementById('root') as HTMLElement
-  );
 */
 
 
