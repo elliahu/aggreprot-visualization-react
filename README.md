@@ -2,7 +2,7 @@ Configuration:
 
 ```ts
 let config: makeChartConfig = {
-  onAreaSelected: function (min, max) {},
+  debug: true,
   labelBreakPoint: 8,
   grid: {
     gridColor: "#dedede",
@@ -13,14 +13,6 @@ let config: makeChartConfig = {
     width: 1,
     size: 10,
     dash: [],
-  },
-  onResidueSelectedFromProfile: (position: number, selected: boolean) => {
-    console.log(
-      `residue ${position} was toggled (selected=${
-        selected ? "true" : "false"
-      }) using aggregation profile, structure viewer will be updated`
-    );
-    this.props.onResidueSelectedFromProfile(position, selected);
   },
   columnHighlight: true, // highlight columns on mouse hover
   displayThresholdLineInRanger: true,
