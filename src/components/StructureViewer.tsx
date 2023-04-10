@@ -17,7 +17,6 @@ import {
   CavityType,
 } from '@loschmidt/molstar';
 import { InteractivityManager } from 'molstar/lib/mol-plugin-state/manager/interactivity';
-import { getProteinSelector } from '@loschmidt/molstar/dist/app/structures';
 import { Loci } from 'molstar/lib/mol-model/loci';
 
 /**
@@ -85,7 +84,7 @@ interface IState {
 
 interface IProps {
   onResidueClickedInStructure: (position: number, label: string, chain: string) => void;
-  loadProteins: LoadProteinParams[]
+  loadProteins: LoadLigandsParams[]
 }
 
 class StructureViewer extends Component<IProps, IState> {

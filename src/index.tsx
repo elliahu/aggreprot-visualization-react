@@ -1,38 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Aggreprot } from './components';
 import './index.css';
 import '@loschmidt/molstar/dist/index.css';
-import Aggreprot from './Aggreprot';
-import { type SelectedResidue, fetchData, type makeChartData, type makeChartConfig } from "protein_visualization";
+import { type SelectedResidue, fetchData, datachart, type makeChartData, type makeChartConfig } from "./components/ProfileViewer";
 
 
 // name of the file that will be fetched
-let sourceFile = process.env.PUBLIC_URL + './datachart_data/DummyData.json';
+let sourceFile = process.env.PUBLIC_URL + './DummyData.json';
 
 const config: makeChartConfig = {
-  labelBreakPoint: 8, // min width between x labels
-  grid: {
-    gridColor: '#dedede',
-    width: 1,
-    dash: []
-  },
-  ticks: {
-    width: 1,
-    size: 10,
-    dash: []
-  },
-  columnHighlight: true, // highlight columns on mouse hover
-  displayThresholdLineInRanger: true,
-  rangerTitle: 'Ranger',
-  profilePlotTitle: 'Aggregation profile',
-  sequencePlotTitle: 'Sequence',
+  debug: true,
 }
 
 fetchData(sourceFile).then(data => {
   ReactDOM.render(
     <React.StrictMode>
       <Aggreprot
-        mapSelectedResidues={(input: SelectedResidue) => { return input }}
+        mapSelectedResidues={ input => input }
         chartData={data}
         chartConfig={config}
         loadProteins={[

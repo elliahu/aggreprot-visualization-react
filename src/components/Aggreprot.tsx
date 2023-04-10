@@ -1,11 +1,10 @@
 import React from 'react';
 import ProfileViewer from './ProfileViewer';
-import './App.css';
+import './Aggreprot.css';
 import { makeChart, makeChartData } from 'protein_visualization';
 import StructureViewer from './StructureViewer';
-import {type LoadProteinParams} from '@loschmidt/molstar';
-import { type SelectedResidue, type makeChartConfig } from "protein_visualization";
-
+import { SelectedResidue, makeChartConfig } from "protein_visualization";
+import { LoadProteinParams } from '@loschmidt/molstar';
 
 interface IProps {
   mapSelectedResidues(input: SelectedResidue, direction?: number): SelectedResidue,
@@ -16,7 +15,7 @@ interface IProps {
 
 interface IState {
   chartFunctions: ReturnType<typeof makeChart> | null,
-  selectedFromProfile: Record<string | number, boolean>,
+  selectedFromProfile: Record<string | number, boolean>, 
   selectedFromStructure: Record<string | number, boolean>,
 }
 

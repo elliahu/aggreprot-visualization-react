@@ -43,4 +43,5 @@ class ProfileViewer extends React.Component<IProps> {
     }
 }
 
-export default ProfileViewer
+export default ProfileViewer;
+export {type SelectedResidue, fetchData, datachart, type makeChartData, type makeChartConfig} from 'protein_visualization';
