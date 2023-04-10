@@ -17,7 +17,7 @@ fetchData(sourceFile).then(data => {
   ReactDOM.render(
     <React.StrictMode>
       <Aggreprot
-        mapSelectedResidues={ input => input }
+        mapSelectedResidues={input => input}
         chartData={data}
         chartConfig={config}
         loadProteins={[
@@ -36,7 +36,7 @@ fetchData(sourceFile).then(data => {
     </React.StrictMode>,
     document.getElementById('root') as HTMLElement
   );
-}); 
+});
 
 // Using raw data:
 /*

@@ -1,25 +1,92 @@
 Configuration:
 
 ```ts
-let config: makeChartConfig = {
+const config: makeChartConfig = {
   debug: true,
   labelBreakPoint: 8,
+  columnHighlight: true,
+  displayThresholdLineInRanger: true,
+  rangerTitle: "Ranger",
+  profilePlotTitle: "Profile",
+  sequencePlotTitle: "Sequence",
   grid: {
-    gridColor: "#dedede",
+    gridColor: '#dedede',
     width: 1,
-    dash: [],
+    dash: []
   },
   ticks: {
     width: 1,
     size: 10,
-    dash: [],
+    dash: []
   },
-  columnHighlight: true, // highlight columns on mouse hover
-  displayThresholdLineInRanger: true,
-  rangerTitle: "Ranger",
-  profilePlotTitle: "Aggregation profile",
-  sequencePlotTitle: "Sequence",
-};
+  pallette: {
+    threshold: {
+      stroke: "rgba(0,0,0,0.5)",
+      dash: [10, 10],
+      spanGaps: true,
+    },
+    ranger: [
+      {
+        stroke: 'red',
+        fill: 'rgba(255, 155, 84, 0.6)',
+        fillTo: 0,
+      },
+      {
+        stroke: 'green',
+        fill: 'rgba(0, 255, 0, 0.2)',
+        fillTo: 0,
+      },
+    ],
+    profile: [
+      [
+        {
+          stroke: 'red',
+          fill: 'rgba(255, 155, 84, 0.6)',
+          fillTo: 0,
+          width: 3,
+          label: 'Aggregation'
+        },
+        {
+          stroke: 'red',
+          fill: null,
+          dash: [10, 5],
+          label: 'ASA'
+        }
+      ],
+      [
+        {
+          stroke: 'green',
+          fill: 'rgba(0, 155, 0, 0.2)',
+          fillTo: 0,
+          width: 3,
+          label: 'Aggregation'
+        },
+        {
+          stroke: 'green',
+          fill: null,
+          dash: [10, 5],
+          label: 'ASA'
+        }
+      ]
+    ],
+    sequence: [
+      {
+        stroke: 'red',
+        fill: 'rgba(255, 155, 84, 0.6)',
+        points: {
+          show: false
+        }
+      },
+      {
+        stroke: 'green',
+        fill: 'rgba(0, 255, 0, 0.2)',
+        points: {
+          show: false
+        }
+      },
+    ],
+  }
+}
 ```
 
 Example using raw data:
