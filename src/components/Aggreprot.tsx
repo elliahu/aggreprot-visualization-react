@@ -1,9 +1,8 @@
 import React from 'react';
 import ProfileViewer from './ProfileViewer';
 import './Aggreprot.css';
-import { makeChart, makeChartData } from 'protein_visualization';
+import { makeChart, makeChartData, SelectedResidue, makeChartConfig } from '@datachart/2D';
 import StructureViewer from './StructureViewer';
-import { SelectedResidue, makeChartConfig } from "protein_visualization";
 import { LoadProteinParams } from '@loschmidt/molstar';
 
 interface IProps {
