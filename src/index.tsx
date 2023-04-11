@@ -23,7 +23,7 @@ const structureConfig: StructureConfig = {
     layoutShowControls: true,
     layoutShowRemoteState: false,
     layoutShowSequence: true,
-    layoutShowLog: false,
+    layoutShowLog: true,
     layoutShowLeftPanel: false,
     layoutShowStructure: false,
   

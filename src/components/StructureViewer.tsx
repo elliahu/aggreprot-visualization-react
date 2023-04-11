@@ -64,22 +64,6 @@ export type StructureConfig = {
   selectColor: number,
 }
 
-const ViewerOptions: ViewerOptionsType = {
-  layoutIsExpanded: false,
-  layoutShowControls: true,
-  layoutShowRemoteState: false,
-  layoutShowSequence: true,
-  layoutShowLog: false,
-  layoutShowLeftPanel: false,
-  layoutShowStructure: false,
-
-  viewportShowExpand: true,
-  viewportShowControls: true,
-  viewportShowSettings: true,
-  viewportShowSelectionMode: true,
-  viewportShowAnimation: true,
-};
-
 interface IState {
   residueIndex: number;
   chain: string;
@@ -114,7 +98,7 @@ class StructureViewer extends Component<IProps, IState> {
   }
 
   async initViewer() {
-    this.viewer = await MolstarWrapper.init('viewer', ViewerOptions);
+    this.viewer = await MolstarWrapper.init('viewer', this.props.structureConfig.viewerOptions);
     this.viewer.setBackground(this.props.structureConfig.backgroundColor);
 
     // subscribe to a click event in the structure viewer
