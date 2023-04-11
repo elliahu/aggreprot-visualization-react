@@ -1,3 +1,10 @@
+Install packages and run development server.
+
+```bash
+npm install
+npm start
+```
+
 Configuration:
 
 ```ts
@@ -87,6 +94,26 @@ const config: makeChartConfig = {
     ],
   }
 }
+
+const structureConfig: StructureConfig = {
+  viewerOptions: {
+    layoutIsExpanded: false,
+    layoutShowControls: true,
+    layoutShowRemoteState: false,
+    layoutShowSequence: true,
+    layoutShowLog: false,
+    layoutShowLeftPanel: false,
+    layoutShowStructure: false,
+  
+    viewportShowExpand: true,
+    viewportShowControls: true,
+    viewportShowSettings: true,
+    viewportShowSelectionMode: true,
+    viewportShowAnimation: true,
+  },
+  backgroundColor: 0xffffff,
+  selectColor: 0x0000ff
+}
 ```
 
 Example using raw data:
@@ -116,9 +143,10 @@ const data: makeChartData = {
 ReactDOM.render(
     <React.StrictMode>
       <Aggreprot
-        mapSelectedResidues={(input: SelectedResidue) => { return input }}
-        chartData={data}
-        loadProteins={[
+        mapSelectedResidues={input => input}
+        profileData={data}
+        profileConfig={profileConfig}
+        structureData={[
           {
             url: process.env.PUBLIC_URL + '/cdk4.pdb',
             format: 'pdb',
@@ -130,6 +158,7 @@ ReactDOM.render(
             label: '8fe1',
           }
         ]}
+        structureConfig={structureConfig}
       />
     </React.StrictMode>,
     document.getElementById('root') as HTMLElement
@@ -143,9 +172,10 @@ fetchData(sourceFile, 'json').then(data => {
   ReactDOM.render(
     <React.StrictMode>
       <Aggreprot
-        mapSelectedResidues={(input: SelectedResidue) => { return input }}
-        chartData={data}
-        loadProteins={[
+        mapSelectedResidues={input => input}
+        profileData={data}
+        profileConfig={profileConfig}
+        structureData={[
           {
             url: process.env.PUBLIC_URL + '/cdk4.pdb',
             format: 'pdb',
@@ -157,16 +187,10 @@ fetchData(sourceFile, 'json').then(data => {
             label: '8fe1',
           }
         ]}
+        structureConfig={structureConfig}
       />
     </React.StrictMode>,
     document.getElementById('root') as HTMLElement
   );
 });
-```
-
-Install packages and run development server.
-
-```bash
-npm install
-npm start
 ```

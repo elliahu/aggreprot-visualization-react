@@ -58,6 +58,12 @@ type PointProps = {
   selector: PointSelector;
 };
 
+export type StructureConfig = {
+  viewerOptions: ViewerOptionsType,
+  backgroundColor: number,
+  selectColor: number,
+}
+
 const ViewerOptions: ViewerOptionsType = {
   layoutIsExpanded: false,
   layoutShowControls: true,
@@ -67,10 +73,10 @@ const ViewerOptions: ViewerOptionsType = {
   layoutShowLeftPanel: false,
   layoutShowStructure: false,
 
-  viewportShowExpand: false,
-  viewportShowControls: false,
-  viewportShowSettings: false,
-  viewportShowSelectionMode: false,
+  viewportShowExpand: true,
+  viewportShowControls: true,
+  viewportShowSettings: true,
+  viewportShowSelectionMode: true,
   viewportShowAnimation: true,
 };
 
@@ -84,7 +90,8 @@ interface IState {
 
 interface IProps {
   onResidueClickedInStructure: (position: number, label: string, chain: string) => void;
-  loadProteins: LoadLigandsParams[]
+  structureData: LoadLigandsParams[],
+  structureConfig: StructureConfig
 }
 
 class StructureViewer extends Component<IProps, IState> {
@@ -108,7 +115,7 @@ class StructureViewer extends Component<IProps, IState> {
 
   async initViewer() {
     this.viewer = await MolstarWrapper.init('viewer', ViewerOptions);
-    this.viewer.setBackground(0xffffff);
+    this.viewer.setBackground(this.props.structureConfig.backgroundColor);
 
     // subscribe to a click event in the structure viewer
     this.viewer.plugin.behaviors.interaction.click.subscribe(
@@ -134,7 +141,7 @@ class StructureViewer extends Component<IProps, IState> {
       }
     );
 
-    this.props.loadProteins.forEach(proteinParam =>{
+    this.props.structureData.forEach(proteinParam =>{
       this.loadProtein(proteinParam);
     })
   }

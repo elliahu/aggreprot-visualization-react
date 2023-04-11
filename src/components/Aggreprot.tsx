@@ -3,13 +3,15 @@ import ProfileViewer from './ProfileViewer';
 import './Aggreprot.css';
 import { makeChart, makeChartData, SelectedResidue, makeChartConfig } from '@datachart/2D';
 import StructureViewer from './StructureViewer';
+import { StructureConfig } from './StructureViewer';
 import { LoadProteinParams } from '@loschmidt/molstar';
 
 interface IProps {
   mapSelectedResidues(input: SelectedResidue, direction?: number): SelectedResidue,
-  chartData: makeChartData,
-  chartConfig: makeChartConfig,
-  loadProteins: LoadProteinParams[]
+  profileData: makeChartData,
+  profileConfig: makeChartConfig,
+  structureData: LoadProteinParams[],
+  structureConfig: StructureConfig
 }
 
 interface IState {
@@ -30,7 +32,7 @@ class Aggreprot extends React.Component<IProps, IState> {
 
   componentDidMount(): void {
     // override the onResidueSelectedFromProfile method
-    this.props.chartConfig.onResidueSelectedFromProfile = (positions: SelectedResidue[]) => {
+    this.props.profileConfig.onResidueSelectedFromProfile = (positions: SelectedResidue[]) => {
       console.log(`${positions.length} residues were toggled using aggregation profile, structure viewer will be updated`);
       positions.forEach((position) => {
         this.onResidueSelectedFromProfile(position.index, position.selected, position.protein, position.chain);
@@ -54,7 +56,7 @@ class Aggreprot extends React.Component<IProps, IState> {
           {
             chain: (mappedPosition.chain == null) ? "A" : mappedPosition.chain,
             position: mappedPosition.index,
-            color: "#FF0000",
+            color: this.props.structureConfig.selectColor,
             focus: true,
           }
         )
@@ -105,15 +107,16 @@ class Aggreprot extends React.Component<IProps, IState> {
   render() {
     return <>
       <ProfileViewer
-        config={this.props.chartConfig}
-        data={this.props.chartData}
+        config={this.props.profileConfig}
+        data={this.props.profileData}
         chartFunctions={this.state.chartFunctions}
         setChartFunctions={chartFunctions => this.setState({ chartFunctions })}
         onResidueSelectedFromProfile={this.onResidueSelectedFromProfile}
       />
       <StructureViewer
         onResidueClickedInStructure={this.onResidueClickedInStructure}
-        loadProteins={this.props.loadProteins}
+        structureData={this.props.structureData}
+        structureConfig={this.props.structureConfig}
         ref={this.molstarViewerComponent}
       />
     </>;

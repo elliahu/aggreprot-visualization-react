@@ -3,14 +3,38 @@ import ReactDOM from 'react-dom';
 import { Aggreprot } from './components';
 import './index.css';
 import '@loschmidt/molstar/dist/index.css';
-import { type SelectedResidue, fetchData, datachart, type makeChartData, type makeChartConfig } from "./components/ProfileViewer";
+import { fetchData, makeChartConfig } from "./components/ProfileViewer";
+import { StructureConfig } from './components/StructureViewer';
 
 
 // name of the file that will be fetched
 let sourceFile = process.env.PUBLIC_URL + './DummyData.json';
 
-const config: makeChartConfig = {
+// config of the profile viewer
+// see https://github.com/elliahu/protein_visualization/blob/master/datachart.js#L148
+const profileConfig: makeChartConfig = {
   debug: true,
+}
+
+// config of structure viewer
+const structureConfig: StructureConfig = {
+  viewerOptions: {
+    layoutIsExpanded: false,
+    layoutShowControls: true,
+    layoutShowRemoteState: false,
+    layoutShowSequence: true,
+    layoutShowLog: false,
+    layoutShowLeftPanel: false,
+    layoutShowStructure: false,
+  
+    viewportShowExpand: true,
+    viewportShowControls: true,
+    viewportShowSettings: true,
+    viewportShowSelectionMode: true,
+    viewportShowAnimation: true,
+  },
+  backgroundColor: 0xffffff,
+  selectColor: 0x0000ff
 }
 
 fetchData(sourceFile).then(data => {
@@ -18,9 +42,9 @@ fetchData(sourceFile).then(data => {
     <React.StrictMode>
       <Aggreprot
         mapSelectedResidues={input => input}
-        chartData={data}
-        chartConfig={config}
-        loadProteins={[
+        profileData={data}
+        profileConfig={profileConfig}
+        structureData={[
           {
             url: process.env.PUBLIC_URL + '/cdk4.pdb',
             format: 'pdb',
@@ -32,6 +56,7 @@ fetchData(sourceFile).then(data => {
             label: '8fe1',
           }
         ]}
+        structureConfig={structureConfig}
       />
     </React.StrictMode>,
     document.getElementById('root') as HTMLElement
