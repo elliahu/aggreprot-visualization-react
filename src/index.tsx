@@ -23,7 +23,7 @@ const structureConfig: StructureConfig = {
     layoutShowControls: true,
     layoutShowRemoteState: false,
     layoutShowSequence: true,
-    layoutShowLog: true,
+    layoutShowLog: false,
     layoutShowLeftPanel: false,
     layoutShowStructure: false,
   
@@ -44,16 +44,16 @@ fetchData(sourceFile).then(data => {
         mapSelectedResidues={input => input}
         profileData={data}
         profileConfig={profileConfig}
-        structureData={[
+        structureData={[ 
           {
-            url: process.env.PUBLIC_URL + '/cdk4.pdb',
+            url: process.env.PUBLIC_URL + '/AmphiLuc4B.pdb',
             format: 'pdb',
-            label: 'cdk4',
+            label: 'AmphiLuc4B',
           },
           {
-            url: process.env.PUBLIC_URL + '/8fe1.pdb',
+            url: process.env.PUBLIC_URL + '/AmphiLuc8.B99990005.pdb',
             format: 'pdb',
-            label: '8fe1',
+            label: 'AmphiLuc8.B99990005',
           }
         ]}
         structureConfig={structureConfig}
