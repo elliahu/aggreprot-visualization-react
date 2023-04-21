@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Aggreprot } from './components';
 import './index.css';
 import '@loschmidt/molstar/dist/index.css';
-import { fetchData, makeChartConfig } from "./components/ProfileViewer";
+import { SelectedResidue, fetchData, makeChartConfig } from "./components/ProfileViewer";
 import { StructureConfig } from './components/StructureViewer';
 
 
@@ -41,7 +41,12 @@ fetchData(sourceFile).then(data => {
   ReactDOM.render(
     <React.StrictMode>
       <Aggreprot
-        mapSelectedResidues={input => input}
+        mapSelectedResidues={input => {
+          let output: SelectedResidue = input;
+          if(input.protein == 'AmphiLuc4B') 
+            output.chain = 'B';
+          return output;
+        }}
         profileData={data}
         profileConfig={profileConfig}
         structureData={[ 
@@ -53,7 +58,7 @@ fetchData(sourceFile).then(data => {
           {
             url: process.env.PUBLIC_URL + '/AmphiLuc8.B99990005.pdb',
             format: 'pdb',
-            label: 'AmphiLuc8.B99990005',
+            label: 'AmphiLuc8-B99990005',
           }
         ]}
         structureConfig={structureConfig}

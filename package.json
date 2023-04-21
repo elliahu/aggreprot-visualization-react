@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@datachart/2D": "file:datachart-0.0.1.tgz",
+    "@datachart/2D": "file:datachart-0.0.11.tgz",
     "@loschmidt/molstar": "file:loschmidt-molstar-0.1.9.tgz",
     "@types/jest": "^27.5.2",
     "@types/node": "^16.18.23",

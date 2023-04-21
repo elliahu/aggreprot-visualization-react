@@ -66,7 +66,7 @@ class Aggreprot extends React.Component<IProps, IState> {
     } else {
       console.warn('this.molstarViewerComponent.current is not defined');
     }
-  }
+  } 
 
   onResidueSelectedFromStructure = (position: number, selected: boolean, label: string, chain: string) => {
     this.setState({
@@ -83,7 +83,7 @@ class Aggreprot extends React.Component<IProps, IState> {
           {
             chain: (mappedPosition.chain == null)? "A": mappedPosition.chain,
             position: mappedPosition.index,
-            color: "#FFFF00",
+            color: this.props.structureConfig.selectColor,
             focus: false,
           }
         )
