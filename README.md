@@ -1,3 +1,5 @@
+# React component library and example App for interactive 2D and 3D visualization of selected protein properties
+
 Install packages and run development server.
 
 ```bash
