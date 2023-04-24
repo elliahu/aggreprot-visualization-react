@@ -32,16 +32,11 @@ class ProfileViewer extends React.Component<IProps> {
     render() {
         return (
             <div>
-                <input type="range" min="0" max="1" step="0.01" value={this.state.thresholdValue} onInput={(event) => {
-                    this.state.thresholdValue = Number.parseFloat((event.target as HTMLInputElement).value);
-                    this.props.chartFunctions?.setThresholdValue(this.state.thresholdValue);
-                }}></input>
-
-                <div id="aggregation-profile" ref={this.aggregationProfileRef} />
+                <div className="profile-viewer" ref={this.aggregationProfileRef} />
             </div>
         );
     }
 }
 
 export default ProfileViewer;
-export {type SelectedResidue, fetchData, datachart, type makeChartData, type makeChartConfig} from '@datachart/2D';
+export { type SelectedResidue, fetchData, datachart, type makeChartData, type makeChartConfig } from '@datachart/2D';

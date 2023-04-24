@@ -1,0 +1,13 @@
+#module {
+    width: 100%;
+    display: flex;
+}
+
+#module > div {
+    width: 50%;
+} 
+
+#viewer{
+    height: 800px;
+}
+

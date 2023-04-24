@@ -262,14 +262,12 @@ class StructureViewer extends Component<IProps, IState> {
 
   render() {
     return (
-      <div>
-        <div className={'molstar-viewer'}>
+        <div className={'structure-viewer'}>
           <div className={'plugin-container'}>
             <div id={'viewer'} />
             <div id={'controls'} />
           </div>
         </div>
-      </div>
     );
   }
 }

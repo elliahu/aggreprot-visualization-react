@@ -5,6 +5,7 @@ import { makeChart, makeChartData, SelectedResidue, makeChartConfig } from '@dat
 import StructureViewer from './StructureViewer';
 import { StructureConfig } from './StructureViewer';
 import { LoadProteinParams } from '@loschmidt/molstar';
+import '@loschmidt/molstar/dist/index.css';
 
 interface IProps {
   mapSelectedResidues(input: SelectedResidue, direction?: number): SelectedResidue,
@@ -22,7 +23,8 @@ interface IState {
 
 class Aggreprot extends React.Component<IProps, IState> {
 
-  molstarViewerComponent = React.createRef<StructureViewer>();
+  structureViewerComponent = React.createRef<StructureViewer>();
+  profileViewerComponent = React.createRef<ProfileViewer>();
 
   state: IState = {
     chartFunctions: null,
@@ -47,11 +49,11 @@ class Aggreprot extends React.Component<IProps, IState> {
         [position]: selected,
       }
     });
-    if (this.molstarViewerComponent.current) {
+    if (this.structureViewerComponent.current) {
       let mappedPosition = this.props.mapSelectedResidues({index: position, selected: selected, protein: label,chain: chain});
       
       if (selected) {
-        this.molstarViewerComponent.current.selectPosition(
+        this.structureViewerComponent.current.selectPosition(
           mappedPosition.protein, // label
           {
             chain: (mappedPosition.chain == null) ? "A" : mappedPosition.chain,
@@ -61,7 +63,7 @@ class Aggreprot extends React.Component<IProps, IState> {
           }
         )
       } else {
-        this.molstarViewerComponent.current.deselectPosition(mappedPosition.protein, mappedPosition.index, (mappedPosition.chain == null) ? "A" : mappedPosition.chain);
+        this.structureViewerComponent.current.deselectPosition(mappedPosition.protein, mappedPosition.index, (mappedPosition.chain == null) ? "A" : mappedPosition.chain);
       }
     } else {
       console.warn('this.molstarViewerComponent.current is not defined');
@@ -76,9 +78,9 @@ class Aggreprot extends React.Component<IProps, IState> {
       }
     });
     let mappedPosition = this.props.mapSelectedResidues({index: position, selected: selected, protein: label,chain: chain});
-    if (this.molstarViewerComponent.current) {
+    if (this.structureViewerComponent.current) {
       if (selected) {
-        this.molstarViewerComponent.current.selectPosition(
+        this.structureViewerComponent.current.selectPosition(
           mappedPosition.protein,
           {
             chain: (mappedPosition.chain == null)? "A": mappedPosition.chain,
@@ -88,7 +90,7 @@ class Aggreprot extends React.Component<IProps, IState> {
           }
         )
       } else {
-        this.molstarViewerComponent.current.deselectPosition(mappedPosition.protein, mappedPosition.index, (mappedPosition.chain == null)? "A": mappedPosition.chain);
+        this.structureViewerComponent.current.deselectPosition(mappedPosition.protein, mappedPosition.index, (mappedPosition.chain == null)? "A": mappedPosition.chain);
       }
     } else {
       console.warn('this.molstarViewerComponent.current is not defined');
@@ -112,15 +114,16 @@ class Aggreprot extends React.Component<IProps, IState> {
         chartFunctions={this.state.chartFunctions}
         setChartFunctions={chartFunctions => this.setState({ chartFunctions })}
         onResidueSelectedFromProfile={this.onResidueSelectedFromProfile}
+        ref={this.profileViewerComponent}
       />
       <StructureViewer
         onResidueClickedInStructure={this.onResidueClickedInStructure}
         structureData={this.props.structureData}
         structureConfig={this.props.structureConfig}
-        ref={this.molstarViewerComponent}
+        ref={this.structureViewerComponent}
       />
     </>;
-  }
+  } 
 }
 
 export default Aggreprot;
