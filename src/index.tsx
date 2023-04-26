@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import { fetchData } from '@datachart/2D';
+import { fetchData } from '@matejelias/datachart';
 
 let sourceFile = process.env.PUBLIC_URL + './DummyData.json';
 fetchData(sourceFile).then(data => {

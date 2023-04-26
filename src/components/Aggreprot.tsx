@@ -1,7 +1,7 @@
 import React from 'react';
 import ProfileViewer from './ProfileViewer';
 import './Aggreprot.css';
-import { makeChart, makeChartData, SelectedResidue, makeChartConfig } from '@datachart/2D';
+import { makeChart, makeChartData, SelectedResidue, makeChartConfig } from '@matejelias/datachart';
 import StructureViewer from './StructureViewer';
 import { StructureConfig } from './StructureViewer';
 import { LoadProteinParams } from '@loschmidt/molstar';

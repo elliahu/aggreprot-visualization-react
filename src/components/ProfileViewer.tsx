@@ -1,7 +1,6 @@
 import React from "react";
-import "@datachart/2D/external/uPlot.min.css";
-import "@datachart/2D/datachart.css";
-import { fetchData, makeChart, type makeChartConfig, type makeChartData, type SelectedResidue } from "@datachart/2D";
+import "@matejelias/datachart/datachart.css";
+import { fetchData, makeChart, type makeChartConfig, type makeChartData, type SelectedResidue } from "@matejelias/datachart"
 
 
 interface IProps {
@@ -39,4 +38,4 @@ class ProfileViewer extends React.Component<IProps> {
 }
 
 export default ProfileViewer;
-export { type SelectedResidue, fetchData, datachart, type makeChartData, type makeChartConfig } from '@datachart/2D';
+export { type SelectedResidue, fetchData, datachart, type makeChartData, type makeChartConfig } from '@matejelias/datachart';

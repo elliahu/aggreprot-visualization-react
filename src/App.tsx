@@ -1,6 +1,6 @@
 import React from 'react';
 import { Aggreprot } from './components';
-import { SelectedResidue, makeChartConfig, makeChartData } from '@datachart/2D';
+import { SelectedResidue, makeChartConfig, makeChartData } from '@matejelias/datachart';
 import { LoadProteinParams } from '@loschmidt/molstar';
 import './App.css'   
 
