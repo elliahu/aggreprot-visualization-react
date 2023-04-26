@@ -2,7 +2,7 @@ import React from 'react';
 import { Aggreprot } from './components';
 import { SelectedResidue, makeChartConfig, makeChartData } from '@matejelias/datachart';
 import { LoadProteinParams } from '@loschmidt/molstar';
-import './App.css'   
+import './App.css'
 
 interface IState {
     thresholdValue: number
@@ -42,11 +42,16 @@ class App extends React.Component<IProps, IState> {
             </div>
             <div id='module'>
                 <Aggreprot
-                    mapSelectedResidues={input => {
-                        let output: SelectedResidue = input;
-                        if (input.protein == 'AmphiLuc4B')
-                            output.chain = 'B';
-                        return output;
+                    mapSelectedResidues={(input, direction) => {
+                        if (!direction) {
+                            let output: SelectedResidue = input;
+                            if (input.protein == 'AmphiLuc4B')
+                                output.chain = 'B';
+                            return output;
+                        }
+                        else{
+                            return input;
+                        }
                     }}
                     profileData={this.props.data2D}
                     profileConfig={{

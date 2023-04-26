@@ -106,7 +106,6 @@ class StructureViewer extends Component<IProps, IState> {
       (event: InteractivityManager.ClickEvent) => {
         const residueIndex = getResidueIndex(event);
         if (residueIndex) {
-          console.log('MolstarViewer: selected residue', residueIndex);
           this.setState({
             residueIndex: residueIndex.residueIndex,
             chain: residueIndex.chain,
