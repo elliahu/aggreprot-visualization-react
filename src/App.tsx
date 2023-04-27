@@ -43,15 +43,7 @@ class App extends React.Component<IProps, IState> {
             <div id='module'>
                 <Aggreprot
                     mapSelectedResidues={(input, direction) => {
-                        if (!direction) {
-                            let output: SelectedResidue = input;
-                            if (input.protein == 'AmphiLuc4B')
-                                output.chain = 'B';
-                            return output;
-                        }
-                        else{
-                            return input;
-                        }
+                        return input;
                     }}
                     profileData={this.props.data2D}
                     profileConfig={{

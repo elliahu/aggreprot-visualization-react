@@ -3,20 +3,20 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import { fetchData } from '@matejelias/datachart';
 
-let sourceFile = process.env.PUBLIC_URL + './DummyData.json';
+let sourceFile = process.env.PUBLIC_URL + './HLDsData.json';
 fetchData(sourceFile).then(data => {
   ReactDOM.render(
     <React.StrictMode>
       <App data2D={data} data3D={[
         {
-          url: process.env.PUBLIC_URL + '/AmphiLuc4B.pdb',
+          url: process.env.PUBLIC_URL + '/1mj5.pdb',
           format: 'pdb',
-          label: 'AmphiLuc4B',
+          label: 'LinB',
         },
         {
-          url: process.env.PUBLIC_URL + '/AmphiLuc8.B99990005.pdb',
+          url: process.env.PUBLIC_URL + '/2psfB.pdb',
           format: 'pdb',
-          label: 'AmphiLuc8-B99990005',
+          label: 'Rluc',
         }
       ]}></App>
     </React.StrictMode>,
