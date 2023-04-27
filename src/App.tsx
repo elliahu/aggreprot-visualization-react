@@ -5,7 +5,8 @@ import { LoadProteinParams } from '@loschmidt/molstar';
 import './App.css'
 
 interface IState {
-    thresholdValue: number
+    thresholdValue: number,
+    yRangeVal: string
 }
 
 interface IProps {
@@ -18,13 +19,14 @@ class App extends React.Component<IProps, IState> {
 
     state: IState = {
         thresholdValue: 0.5,
+        yRangeVal: '0,1'
     }
 
     render() {
         return <>
             <div id='module-controls'>
                 <input type="range" min="0" max="1" step="0.01" value={this.state.thresholdValue} onInput={(event) => {
-                    this.state.thresholdValue = Number.parseFloat((event.target as HTMLInputElement).value);
+                    this.setState({thresholdValue:  Number.parseFloat((event.target as HTMLInputElement).value)});
                     this.aggreprotComponent.current?.profileViewerComponent.current?.props.chartFunctions?.setThresholdValue(this.state.thresholdValue);
                 }}></input>
                 <button onClick={(event) => {
@@ -39,6 +41,17 @@ class App extends React.Component<IProps, IState> {
                 <button onClick={(event) => {
                     this.aggreprotComponent.current?.profileViewerComponent.current?.props.chartFunctions?.displaySequenceAsXLabels(this.props.data3D[1].label);
                 }}>Display protein 2 as labels</button>
+                <input value={this.state.yRangeVal} onInput={(event) => {
+                    this.setState({yRangeVal: (event.target as HTMLInputElement).value});
+                }}></input>
+                <button onClick={(event) => {
+                    let s = this.state.yRangeVal.split(',');
+                    let min = parseFloat(s[0]);
+                    let max = parseFloat(s[1]);
+                    if(!isNaN(min) && !isNaN(max)){
+                        this.aggreprotComponent.current?.profileViewerComponent.current?.props.chartFunctions?.setYRange(min,max);
+                    }
+                }}>Set Y Range</button>
             </div>
             <div id='module'>
                 <Aggreprot

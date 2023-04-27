@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@matejelias/datachart": "file:aggreprot-datachart-0.1.0.tgz",
+    "@matejelias/datachart": "file:aggreprot-datachart-0.1.1.tgz",
     "@loschmidt/molstar": "file:loschmidt-molstar-0.1.9.tgz",
     "@types/jest": "^27.5.2",
     "@types/node": "^16.18.23",
