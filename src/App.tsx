@@ -61,6 +61,7 @@ class App extends React.Component<IProps, IState> {
                     profileData={this.props.data2D}
                     profileConfig={{
                         debug: true,
+                        legendAsTooltip: false // POI change to true if legend should float
                     }}
                     structureData={this.props.data3D}
                     structureConfig={{
@@ -84,6 +85,9 @@ class App extends React.Component<IProps, IState> {
                     }}
                     ref={this.aggreprotComponent}
                 />
+            </div>
+            <div id='tutorial'>
+                <p>Návod a popis ovládání k dispozici v README.md souboru.</p>
             </div>
         </>;
     }

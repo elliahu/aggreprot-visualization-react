@@ -42,10 +42,21 @@ class Aggreprot extends React.Component<IProps, IState> {
     };
   }
 
+  /**
+   * Called when a residue was selected in profile
+   * @param position idx of the residue position
+   * @param selected is position selected or deselected
+   * @param label label used to identify which protein the selection was made in
+   * @param chain chain of the residue
+   */
   onResidueSelectedFromProfile = (position: number, selected: boolean, label: string, chain?: string) => {
     this.setState({
       selectedFromProfile: {
         ...this.state.selectedFromProfile,
+        [position]: selected,
+      },
+      selectedFromStructure: {
+        ...this.state.selectedFromStructure,
         [position]: selected,
       }
     });
@@ -70,6 +81,13 @@ class Aggreprot extends React.Component<IProps, IState> {
     }
   } 
 
+  /**
+   * Called when residue is selected from the structure
+   * @param position idx of the residue position
+   * @param selected is position selected or deselected
+   * @param label label used to identify which protein the selection was made in
+   * @param chain chain of the residue
+   */
   onResidueSelectedFromStructure = (position: number, selected: boolean, label: string, chain: string) => {
     this.setState({
       selectedFromStructure: {

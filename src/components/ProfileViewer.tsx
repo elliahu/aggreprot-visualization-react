@@ -28,6 +28,7 @@ class ProfileViewer extends React.Component<IProps> {
         this.props.setChartFunctions(chartFunctions);
     }
 
+    // This is basically a wrapper for @matejelias/datachart library
     render() {
         return (
             <div>
