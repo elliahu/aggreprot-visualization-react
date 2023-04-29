@@ -6,7 +6,7 @@ import './App.css'
 
 interface IState {
     thresholdValue: number,
-    yRangeVal: string
+    yRangeVal: string,
 }
 
 interface IProps {
