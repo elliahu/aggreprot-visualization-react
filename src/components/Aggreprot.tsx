@@ -61,20 +61,19 @@ class Aggreprot extends React.Component<IProps, IState> {
       }
     });
     if (this.structureViewerComponent.current) {
-      let mappedPosition = this.props.mapSelectedResidues({index: position, selected: selected, protein: label,chain: chain});
-      
+      let mappedPosition = this.props.mapSelectedResidues({index: position, selected: selected, protein: label,chain: chain}, 0);
       if (selected) {
         this.structureViewerComponent.current.selectPosition(
           mappedPosition.protein, // label
           {
-            chain: (mappedPosition.chain == null) ? "A" : mappedPosition.chain,
-            position: mappedPosition.index,
+            chain: (mappedPosition.chain === undefined || mappedPosition.chain === null)? "A": mappedPosition.chain,
+            position: parseInt(mappedPosition.index.toString()), // ???? doesn't work if just mappedPosition.index even tho it has value and is the correct type
             color: this.props.structureConfig.selectColor,
             focus: true,
           }
         )
       } else {
-        this.structureViewerComponent.current.deselectPosition(mappedPosition.protein, mappedPosition.index, (mappedPosition.chain == null) ? "A" : mappedPosition.chain);
+        this.structureViewerComponent.current.deselectPosition(mappedPosition.protein, parseInt(mappedPosition.index.toString()), (mappedPosition.chain === undefined || mappedPosition.chain === null) ? "A" : mappedPosition.chain);
       }
     } else {
       console.warn('this.molstarViewerComponent.current is not defined');
@@ -95,7 +94,7 @@ class Aggreprot extends React.Component<IProps, IState> {
         [position]: selected,
       }
     });
-    let mappedPosition = this.props.mapSelectedResidues({index: position, selected: selected, protein: label,chain: chain});
+    let mappedPosition = this.props.mapSelectedResidues({index: position, selected: selected, protein: label,chain: chain},1);
     if (this.structureViewerComponent.current) {
       if (selected) {
         this.structureViewerComponent.current.selectPosition(
